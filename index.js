@@ -8,7 +8,7 @@ const stock = require("./stock.js");
 const { saveItem, getItems } = require("./db/db");
 const bulbs = require("./data/bulbs.js");
 
-// io.origins(['https://bulbs.oljo.me:443']);
+io.origins(['https://trading.oljo.me:443']);
 
 app.get("/prices", async function(req, res) {
     let priceHistory = await getItems();
