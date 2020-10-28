@@ -1,14 +1,15 @@
 var app = require('express')();
 const cors = require("cors");
-// TODO: Configure cors
+
 app.use(cors());
+
 var http = require('http').Server(app);
 const io = require('socket.io')(http);
 const stock = require("./stock.js");
 const { saveItem, getItems } = require("./db/db");
 const bulbs = require("./data/bulbs.js");
 
-io.origins(['https://trading.oljo.me:443']);
+io.origins(['https://trading.oljo.me:443', 'localhost:*']);
 
 app.get("/prices", async function(req, res) {
     let priceHistory = await getItems();
@@ -41,5 +42,5 @@ setInterval(function () {
 
 
 http.listen(4000, function() {
-    console.log('listening on *:4000');
+    console.log('Socket-service listening on *:4000');
 });
